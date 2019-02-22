@@ -1,0 +1,25 @@
+image: 'maven:3-jdk-8'
+stages:
+    - test
+    - build
+services:
+  - 'mysql:5.5'
+variables:
+ MYSQL_DATABASE: cplayerdb
+ MYSQL_CI_URL: jdbc:mysql://mysql/cplayerdb
+ MYSQL_USER: app_root
+ MYSQL_PASSWORD: root
+ MYSQL_ROOT_PASSWORD: root
+cache:
+  paths:
+  - .m2/repository
+  - target
+maven-test:
+ stage: test
+ script: "mvn test -B"
+maven-build:
+ stage: build
+ script: "mvn package -B"
+ artifacts:
+  paths:
+  - target/*.jar

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+  <a class="navbar-brand" routerLink="/">Cplayers</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul class="navbar-nav ml-auto topnav">
+      <li class="nav-item  m-1">
+        <a class="nav-item btn btn-primary  col-12" routerLink="/">Dashboard </a>
+      </li>
+
+      
+      
+      <li class="nav-item m-1" *ngIf="authService.loggedIn" >
+        <a class="nav-item btn btn-primary  col-12" id="favouriteButton" routerLink="/favourite">Favourites</a>
+      </li>
+      <li class="nav-item m-1 " *ngIf="authService.loggedIn" >
+        <a class="nav-item btn btn-danger col-12" id="logoutButton" (click)="logout()">
+          <i  class="fas fa-sign-in-alt"></i>Logout</a>
+        
+        </li>
+
+        <li class="nav-item m-1" *ngIf="!authService.loggedIn" ><a  class="nav-item btn btn-success col-12" routerLink="/signup"><i class="fas fa-user-plus"></i>SignUp</a></li>
+      <li class="nav-item m-1" *ngIf="!authService.loggedIn"><a   class="nav-item btn btn-success col-12" routerLink="/login"><i class="fas fa-sign-in-alt"></i>Login</a></li>
+
+    </ul>
+
+  </div>
+
+
+</nav>

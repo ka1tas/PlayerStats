@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+
+      <h2 class="text-center m-4" id="title"> LOG IN</h2>
+
+      <div *ngIf="!status.loginStatus" id="errorwrong" class="alert alert-danger">
+        <h6>Email or Password did not matched!</h6>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        <h6>Something went wrong! Retry or contact admin.</h6>
+      </div>
+
+
+
+
+      <form [formGroup]="loginform">
+
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input type="email" id="loginemail" class="form-control" formControlName="email"
+            placeholder="*Enter a valid email">
+        </div>
+
+        <div *ngIf="loginform.get('email').touched && loginform.get('email').invalid">
+
+          <div *ngIf="loginform.get('email').errors.required" class="alert alert-danger">*Email is required</div>
+          <div *ngIf="loginform.get('email').errors.minlength" class="alert alert-danger">Email must be minimum 5
+            characters</div>
+          <div *ngIf="loginform.get('email').errors.maxlength" class="alert alert-danger">Email must be maximum of 250
+            characters</div>
+          <div *ngIf="loginform.get('email').errors.pattern" class="alert alert-danger">Email pattern is not valid.
+            (name@cognizant.com)</div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="name">Password</label>
+          <input type="password" id="loginpassword" class="form-control" name="text" formControlName="password"
+            placeholder="*Choose a password">
+        </div>
+
+        <div *ngIf="loginform.get('password').touched && loginform.get('password').invalid">
+          <div *ngIf="loginform.get('password').errors.required" class="alert alert-danger">*password is required</div>
+          <div *ngIf="loginform.get('password').errors.minlength" class="alert alert-danger">password must be minimum
+            5 characters</div>
+          <div *ngIf="loginform.get('password').errors.maxlength" class="alert alert-danger">password must be maximum
+            of 50 characters</div>
+        </div>
+
+        <div class="footer text-center">
+          <button class="btn btn-success btn-round" id="loginbutton" [disabled]="!loginform.valid"
+            (click)="login();">Log In</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>

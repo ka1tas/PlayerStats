@@ -1,0 +1,324 @@
+<div class="container-fluid mt-3">
+
+    <h3 id="title">Favourites</h3>
+    <div *ngIf="error" class="alert alert-danger">
+        <h6>Something went wrong! Retry or contact admin.</h6>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let player of favPlayers">
+            <div class="card  border-dark mb-3 " id="favCard" style="width: 18rem;">
+                <div class="card-header bg-info">
+                    <h4> <i class="fas fa-user"></i>{{player.name}} <i class="far fa-trash-alt float-right pointer"
+                           id="removeFavButton" (click)="deleteFav(player);"></i>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{player.imageURL}}" class="card-img-top" alt="...">
+
+
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h5 class="card-title"> <b>Country:</b>{{player.country}} </h5>
+                        </li>
+                        <li class="list-group-item"><b>Role: </b>{{player.playingRole}}</li>
+                        <li class="list-group-item"><b>Teams:</b>{{player.majorTeams}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <button class="btn btn-info" data-toggle="modal" data-target="#playerStats"
+                            (click)="showStats(player.pid)">
+                            Show Stats</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="container" *ngIf="showmodal">
+    <div class="modal fade" id="playerStats">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{playerDetails.name}}</h4>
+                    <button type="button " data-dismiss="modal" class="close fa fa-times float-right"></button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{playerDetails.imageURL}}" class="card-img-top img-thumbnail"
+                                        height="200" width="100" alt="playerimage">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2"></div>
+                            <div class="col-lg-7 col-md-12 col-12 col-sm-12 ">
+                                <div class="row">
+
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Plays for</th>
+                                            <td colspan="2">{{playerDetails.country}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Age</th>
+                                            <td colspan="2">{{playerDetails.currentAge}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Born</th>
+                                            <td colspan="2">{{playerDetails.born}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Role</th>
+                                            <td colspan="2">{{playerDetails.playingRole}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Teams Played For</th>
+                                            <td colspan="2">{{playerDetails.majorTeams}}</td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <h3>Batting Stats</h3>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                <h5>TESTs</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.batting.tests.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.batting.tests.Inns}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Runs</td>
+                                        <td>{{playerDetails.data.batting.tests.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Highest Score</td>
+                                        <td>{{playerDetails.data.batting.tests.HS}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average</td>
+                                        <td>{{playerDetails.data.batting.tests.Ave}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Not Outs</td>
+                                        <td>{{playerDetails.data.batting.tests.NO}}</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+
+                                <h5>ODIs</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.batting.ODIs.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.batting.ODIs.Inns}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Runs</td>
+                                        <td>{{playerDetails.data.batting.ODIs.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Highest Score</td>
+                                        <td>{{playerDetails.data.batting.ODIs.HS}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average</td>
+                                        <td>{{playerDetails.data.batting.ODIs.Ave}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Not Outs</td>
+                                        <td>{{playerDetails.data.batting.ODIs.NO}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+
+                                <h5>T20s</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.batting.T20Is.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.batting.T20Is.Inns}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Runs</td>
+                                        <td>{{playerDetails.data.batting.T20Is.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Highest Score</td>
+                                        <td>{{playerDetails.data.batting.T20Is.HS}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average</td>
+                                        <td>{{playerDetails.data.batting.T20Is.Ave}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Not Outs</td>
+                                        <td>{{playerDetails.data.batting.T20Is.NO}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <h3>Bowling Stats</h3>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+
+                                <h5>Tests</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.bowling.tests.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.bowling.tests.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wickets</td>
+                                        <td>{{playerDetails.data.bowling.tests.Wkts}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balls</td>
+                                        <td>{{playerDetails.data.bowling.tests.Balls}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Runs</td>
+                                        <td>{{playerDetails.data.bowling.tests.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Economy</td>
+                                        <td>{{playerDetails.data.bowling.tests.Econ}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Average</td>
+                                        <td>{{playerDetails.data.bowling.tests.Ave}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+
+                                <h5>ODIs</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Inns}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Wickets </td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Wkts}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balls</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Balls}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Runs</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Economy</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Econ}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Average</td>
+                                        <td>{{playerDetails.data.bowling.ODIs.Ave}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+
+                                <h5>T20Is</h5>
+                                <table class="table table-striped" border="1px">
+                                    <tr>
+                                        <td>Matches</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Mat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innings</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Inns}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Wickets </td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Wkts}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balls</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Balls}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Runs</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Runs}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Economy</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Econ}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Average</td>
+                                        <td>{{playerDetails.data.bowling.T20Is.Ave}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close btn btn-default" data-dismiss="modal">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

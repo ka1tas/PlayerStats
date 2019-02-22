@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+
+      <h2 class="text-center m-4"> SIGN UP</h2>
+
+      
+      <div *ngIf="status.signupStatus" id="signupSuccess" class="alert alert-success">
+          <h6>User added successfully! click  <a [routerLink]="[ '/login']">HERE</a> Here to login!   </h6>
+
+        </div>
+
+        <div *ngIf="status.emailExist" id="signupError" class="alert alert-danger">
+          <h6>Email Already Exists!</h6>
+
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger">
+          <h6>Something went wrong! Retry or contact admin.</h6>
+        </div>
+
+      <form [formGroup]="signupform">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="signupname" class="form-control" formControlName="name" placeholder="* Enter your name">
+        </div>
+        <div *ngIf="signupform.get('name').touched && signupform.get('name').invalid">
+
+          <div *ngIf="signupform.get('name').errors.required" class="alert alert-danger">*Name is required</div>
+          <div *ngIf="signupform.get('name').errors.minlength" class="alert alert-danger">Name must be minimum 1 characters</div>
+          <div *ngIf="signupform.get('name').errors.maxlength" class="alert alert-danger">Name must be maximum of 50 characters</div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input type="email" id="signupemail" class="form-control" formControlName="email" placeholder="*Enter a valid email">
+        </div>
+
+        <div *ngIf="signupform.get('email').touched && signupform.get('email').invalid">
+
+          <div *ngIf="signupform.get('email').errors.required" class="alert alert-danger">*Email is required</div>
+          <div *ngIf="signupform.get('email').errors.minlength" class="alert alert-danger">Email must be minimum 5 characters</div>
+          <div *ngIf="signupform.get('email').errors.maxlength" class="alert alert-danger">Email must be maximum of 250 characters</div>
+          <div *ngIf="signupform.get('email').errors.pattern" class="alert alert-danger">Email pattern is not valid. (name@cognizant.com)</div> 
+        </div>
+
+
+
+
+        <div class="form-group">
+          <label for="name">Password</label>
+          <input type="password" id="signuppassword" class="form-control" name="text" formControlName="password"
+            placeholder="*Choose a password">
+        </div>
+
+        <div *ngIf="signupform.get('password').touched && signupform.get('password').invalid">
+          <div *ngIf="signupform.get('password').errors.required" class="alert alert-danger">*password is required</div>
+          <div *ngIf="signupform.get('password').errors.minlength" class="alert alert-danger">password must be minimum 5 characters</div>
+          <div *ngIf="signupform.get('password').errors.maxlength" class="alert alert-danger">password must be maximum of 25 characters</div>
+        </div>
+
+        <div class="footer text-center">
+          <button class="btn btn-success btn-round" id="signupbutton" [disabled]="!signupform.valid" (click)="signup();">Sign Up</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
